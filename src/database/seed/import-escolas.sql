@@ -1,0 +1,1 @@
+\copy escolas FROM './data/escolas_filtradas.csv' WITH NULL AS 'NA' DELIMITER ';' CSV HEADER;

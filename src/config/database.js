@@ -5,7 +5,7 @@ module.exports = {
   password: 'secret',
   database: 'educhatbot',
   define: {
-    timestamps: true,
+    timestamps: false,
     underscored: true
   },
 }
