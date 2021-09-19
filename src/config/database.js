@@ -1,11 +1,11 @@
 module.exports = {
   dialect: 'postgres',
-  host: 'localhost',
+  host: 'edu-chatbot-postgres',
   username: 'postgres',
   password: 'secret',
   database: 'educhatbot',
   define: {
-    timestamps: false,
+    timestamps: true,
     underscored: true
   },
 }
