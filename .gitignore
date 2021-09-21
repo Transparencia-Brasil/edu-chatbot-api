@@ -1,2 +1,5 @@
+# dependencias
 node_modules
-data/*.csv
+
+# arquivos grandes
+data/escolas_filtradas.csv
