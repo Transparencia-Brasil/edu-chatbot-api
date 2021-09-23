@@ -3,7 +3,7 @@ const Escola = require('../models/Escola');
 
 module.exports = {
   async search(req, res) {
-    const { nome, cidade, uf, ensino } = req.query;
+    const { nome, municipio, uf } = req.query;
 
     const whereClause = [];
     if (typeof nome !== 'undefined') {
@@ -11,14 +11,14 @@ module.exports = {
         'no_entidade': { [Op.like]: '%' + nome + '%' }
       });
     }
-    if (typeof cidade !== 'undefined') {
-      whereClause.push({ 'co_municipio': cidade });
+    if (typeof municipio !== 'undefined') {
+      whereClause.push({ 'co_municipio': municipio });
     }
     if (typeof uf !== 'undefined') {
       whereClause.push({ 'co_uf': uf });
     }
 
-    const escola = await Escola.findAll({
+    const escolas = await Escola.findAll({
       where: {
         [Op.and]: [
           whereClause
@@ -26,6 +26,6 @@ module.exports = {
       }
     });
 
-    return res.json(escola);
+    return res.json(escolas);
   }
 }
