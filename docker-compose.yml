@@ -5,7 +5,9 @@ services:
   api:
     build: .
     container_name: edu-chatbot-api
-    image: edu-chatbot-image
+    image: edu-chatbot-api
+    env_file:
+      - ./.env
     volumes:
       - ./src:/app/src
     ports:
@@ -15,11 +17,8 @@ services:
     image: postgres:11.1-alpine
     container_name: edu-chatbot-postgres
     restart: always
-    environment:
-      - POSTGRES_DB=${POSTGRES_DB:-educhatbot}
-      - POSTGRES_USER=${POSTGRES_USER:-postgres}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-secret}
-      - TZ=GMT
+    env_file:
+      - ./.env
     volumes:
       - postgres_data:/var/lib/postgresql/data/
       - ./data:/app/data
