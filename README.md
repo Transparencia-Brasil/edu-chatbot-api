@@ -45,7 +45,7 @@ docker exec -it edu-chatbot-postgres sh
 e depois:
 
 ```
-psql -h localhost -U educhatbot -d educhatbot -f app/seed/import-escolas.sql
+psql -h localhost -U educhatbot -d educhatbot -f app/seed/import-data.sql
 ```
 
 NOTA: Dados de acesso ao banco usados no comando acima variam conforme as variáveis de ambiente definidas no `.env`.
