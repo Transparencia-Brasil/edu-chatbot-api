@@ -1,4 +1,4 @@
-const { Op } = require('sequelize');
+const { Op, Sequelize } = require('sequelize');
 const Escola = require('../models/Escola');
 
 module.exports = {
@@ -7,9 +7,14 @@ module.exports = {
 
     const whereClause = [];
     if (typeof nome !== 'undefined') {
-      whereClause.push({
-        'no_entidade': { [Op.like]: '%' + nome + '%' }
-      });
+      whereClause.push(
+        Sequelize.where(
+          Sequelize.fn('LOWER', Sequelize.col('no_entidade')),
+          {
+            [Op.like]: '%' + nome.toLowerCase() + '%'
+          }
+        )
+      );
     }
     if (typeof municipio !== 'undefined') {
       whereClause.push({ 'co_municipio': municipio });

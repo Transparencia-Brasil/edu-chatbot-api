@@ -1,4 +1,4 @@
-const { Op } = require('sequelize');
+const { Op, Sequelize } = require('sequelize');
 const Municipio = require('../models/Municipio');
 const Uf = require('../models/Uf');
 
@@ -8,13 +8,16 @@ module.exports = {
 
     const whereClause = [];
     if (typeof nome !== 'undefined') {
-      whereClause.push({
-        'nome': { [Op.like]: '%' + nome + '%' }
-      });
+      whereClause.push(Sequelize.where(
+        Sequelize.fn('LOWER', Sequelize.col('Municipio.nome')),
+        {
+          [Op.like]: '%' + nome.toLowerCase() + '%'
+        }
+      ));
     }
-    let whereUf = true;
+    let whereUf = [];
     if (typeof uf !== 'undefined') {
-      whereUf = { 'uf': uf }
+      whereUf.push({ 'uf': uf });
     }
 
     const municipios = await Municipio.findAll({
