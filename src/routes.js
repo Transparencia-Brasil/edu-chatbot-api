@@ -9,6 +9,7 @@ routes.get('/', (req, res) => {
   return res.json({ status: 'OK'});
 });
 
+routes.get('/escolas', EscolaController.find);
 routes.get('/escolas/pesquisar', EscolaController.search);
 routes.get('/municipios/pesquisar', MunicipioController.search);
 routes.get('/respostas', RespostaController.index);
