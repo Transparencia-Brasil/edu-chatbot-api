@@ -8,14 +8,22 @@ module.exports = {
       return res.json([]);
     }
 
-    const whereClause = [];
-    if (typeof municipio !== 'undefined') {
-      whereClause.push({ 'co_municipio': municipio });
-    }
-    if (typeof uf !== 'undefined') {
-      whereClause.push({ 'co_uf': uf });
-    }
+    const termos = nome.split(' ').join(' | ');
 
+    const where = [];
+    let whereClause = '';
+    if (typeof uf !== 'undefined' || typeof municipio !== 'undefined') {
+      where.push(' AND');
+      if (typeof municipio !== 'undefined') {
+        where.push('co_municipio = :municipio AND');
+      }
+      if (typeof uf !== 'undefined') {
+        where.push('co_uf = :uf AND');
+      }
+      whereClause = where.join(' ');
+      whereClause = whereClause.substr(0, whereClause.length - 4);
+    }
+    
     const result = await Escola.sequelize.query(`
       SELECT
         nu_ano_censo,
@@ -34,28 +42,36 @@ module.exports = {
         in_agua_inexistente,
         in_agua_potavel,
         in_area_verde,
-        in_patio_descoberto
+        in_patio_descoberto,
+        ts_rank_cd(fulltext_vector, query) AS rank
       FROM
-        ${Escola.tableName}
+        ${Escola.tableName},
+        to_tsquery('Portuguese', :query) AS query
       WHERE
-        fulltext_vector @@ plainto_tsquery('Portuguese', :query);`, {
+        fulltext_vector @@ query${whereClause}
+      ORDER BY
+        rank DESC
+      LIMIT 10;`, {
           model: Escola,
           replacements: {
-            query: nome
+            query: termos,
+            uf: uf,
+            municipio: municipio
           }
         });
-    const escolas = await Escola.findAll({
-      where: {
-        [Op.and]: [
-          whereClause
-        ],
-        co_entidade: {
-          [Op.in]: result.map(r => `${r['co_entidade']}`)
-        }
-      }
-    })
+    // console.log(JSON.stringify(result[0]));
+    // const escolas = await Escola.findAll({
+    //   where: {
+    //     [Op.and]: [
+    //       whereClause
+    //     ],
+    //     co_entidade: {
+    //       [Op.in]: result.map(r => `${r['co_entidade']}`)
+    //     }
+    //   }
+    // })
 
-    return res.json(escolas);
+    return res.json(result);
   },
 
   async find(req, res) {
