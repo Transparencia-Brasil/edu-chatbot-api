@@ -15,45 +15,123 @@ module.exports = {
     return res.json(resposta);
   },
 
-  async store(req, res) {
+  async storeInicio(req, res) {
     const { 
       user_id,
       aluno_rede_publica,
-      aulas,
-      formato_aulas,
-      professores_usando_mascara,
-      alunos_usando_mascara,
-      quantidade_alunos_aula_presencial,
-      distanciamento_sala,
-      distanciamento_merenda,
-      espaco_alternativo_merenda,
-      patio_descoberto,
-      agua_lavar_maos,
-      agua_beber,
-      area_verde,
-      confirma_veracidade,
-      complemento
+      relacao_escola,
+      segmento_curso,
+      nivel_escola,
+      nome_escola,
      } = req.body;
 
     const resposta = await Resposta.create({ 
       user_id,
       aluno_rede_publica,
+      relacao_escola,
+      segmento_curso,
+      nivel_escola,
+      nome_escola,
+     });
+
+    return res.json(resposta);
+  },
+
+  async storeAulas(req, res) {
+    const { 
+      user_id,
       aulas,
       formato_aulas,
       professores_usando_mascara,
       alunos_usando_mascara,
-      quantidade_alunos_aula_presencial,
       distanciamento_sala,
       distanciamento_merenda,
       espaco_alternativo_merenda,
+     } = req.body;
+
+    const respostaInicio = await Resposta.findOne({
+      where: {
+        user_id: user_id
+      },
+      order: [
+        ['created_at', 'DESC']
+      ]
+    });
+
+    const resposta = await Resposta.update({
+      aulas,
+      formato_aulas,
+      professores_usando_mascara,
+      alunos_usando_mascara,
+      distanciamento_sala,
+      distanciamento_merenda,
+      espaco_alternativo_merenda,
+     }, {
+       where: {
+         id: respostaInicio.id
+       }
+     });
+
+    return res.json(respostaInicio);
+  },
+
+  async storeInfra(req, res) {
+    const { 
+      user_id,
       patio_descoberto,
       agua_lavar_maos,
       agua_beber,
       area_verde,
-      confirma_veracidade,
-      complemento
+     } = req.body;
+
+    const respostaInicio = await Resposta.findOne({
+      where: {
+        user_id: user_id
+      },
+      order: [
+        ['created_at', 'DESC']
+      ]
+    });
+
+    const resposta = await Resposta.update({
+      patio_descoberto,
+      agua_lavar_maos,
+      agua_beber,
+      area_verde,
+     }, {
+       where: {
+         id: respostaInicio.id
+       }
      });
 
-    return res.json(resposta);
+    return res.json(respostaInicio);
+  },
+
+  async storeFim(req, res) {
+    const { 
+      user_id,
+      confirma_veracidade,
+      complemento,
+     } = req.body;
+
+    const respostaInicio = await Resposta.findOne({
+      where: {
+        user_id: user_id
+      },
+      order: [
+        ['created_at', 'DESC']
+      ]
+    });
+
+    const resposta = await Resposta.update({
+      confirma_veracidade,
+      complemento,
+     }, {
+       where: {
+         id: respostaInicio.id
+       }
+     });
+
+    return res.json(respostaInicio);
   }
 }
