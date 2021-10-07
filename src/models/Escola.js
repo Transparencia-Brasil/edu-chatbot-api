@@ -25,6 +25,9 @@ class Escola extends Model {
       in_agua_potavel: DataTypes.INTEGER,
       in_area_verde: DataTypes.INTEGER,
       in_patio_descoberto: DataTypes.INTEGER,
+      rede: DataTypes.STRING,
+      nome_mun_formatado: DataTypes.STRING,
+      escola_limpo: DataTypes.STRING,
     }, {
       sequelize: connection,
       timestamps: false

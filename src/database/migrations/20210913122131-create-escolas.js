@@ -246,6 +246,9 @@ module.exports = {
       in_esp_exclusiva_eja_prof: Sequelize.DataTypes.INTEGER,
       in_comum_prof: Sequelize.DataTypes.INTEGER,
       in_esp_exclusiva_prof: Sequelize.DataTypes.INTEGER,
+      rede: Sequelize.DataTypes.STRING,
+      nome_mun_formatado: Sequelize.DataTypes.STRING,
+      escola_limpo: Sequelize.DataTypes.STRING,
     });
   },
 

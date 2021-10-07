@@ -43,6 +43,9 @@ module.exports = {
         in_agua_potavel,
         in_area_verde,
         in_patio_descoberto,
+        rede,
+        nome_mun_formatado,
+        escola_limpo,
         ts_rank_cd(fulltext_vector, query) AS rank
       FROM
         ${Escola.tableName},
@@ -59,17 +62,6 @@ module.exports = {
             municipio: municipio
           }
         });
-    // console.log(JSON.stringify(result[0]));
-    // const escolas = await Escola.findAll({
-    //   where: {
-    //     [Op.and]: [
-    //       whereClause
-    //     ],
-    //     co_entidade: {
-    //       [Op.in]: result.map(r => `${r['co_entidade']}`)
-    //     }
-    //   }
-    // })
 
     return res.json(result);
   },
