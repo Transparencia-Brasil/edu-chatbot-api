@@ -40,7 +40,6 @@ module.exports = {
   async storeAulas(req, res) {
     const { 
       user_id,
-      aulas,
       formato_aulas,
       professores_usando_mascara,
       alunos_usando_mascara,
@@ -59,7 +58,6 @@ module.exports = {
     });
 
     const resposta = await Resposta.update({
-      aulas,
       formato_aulas,
       professores_usando_mascara,
       alunos_usando_mascara,
