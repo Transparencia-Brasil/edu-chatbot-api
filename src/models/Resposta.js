@@ -15,7 +15,6 @@ class Resposta extends Model {
       segmento_curso: DataTypes.STRING,
       nivel_escola: DataTypes.STRING,
       nome_escola: DataTypes.STRING,
-      aulas: DataTypes.STRING,
       formato_aulas: DataTypes.STRING,
       professores_usando_mascara: DataTypes.STRING,
       alunos_usando_mascara: DataTypes.STRING,
