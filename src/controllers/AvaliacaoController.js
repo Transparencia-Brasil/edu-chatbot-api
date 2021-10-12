@@ -21,6 +21,7 @@ module.exports = {
         resultado: "Resposta não encontrada",
         resposta: null
       });
+      return;
     }
 
     const avaliacao = calcularPontuacaoTotal(resposta);
@@ -49,6 +50,7 @@ module.exports = {
         resultado: "Resposta não encontrada",
         resposta: null
       });
+      return;
     }
 
     const pontuacao = calcularPontuacaoFaseAulas(resposta);
@@ -77,6 +79,7 @@ module.exports = {
         resultado: "Resposta não encontrada",
         resposta: null
       });
+      return;
     }
 
     const pontuacao = calcularPontuacaoFaseInfra(resposta)
