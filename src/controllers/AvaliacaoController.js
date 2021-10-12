@@ -1,6 +1,8 @@
 const { Op, Sequelize } = require('sequelize');
 const Resposta = require('../models/Resposta');
 
+const { calcularPontuacaoTotal } = require('../scripts/avaliacao');
+
 module.exports = {
   async get(req, res) {
     const user_id = req.params.user_id
@@ -13,22 +15,19 @@ module.exports = {
       ]
     });
 
-    let pontuacao = 0;
-    Object.keys(resposta.dataValues).map((item) => {
-      switch (item) {
-        case "aulas":
-          pontuacao += (resposta.dataValues['aulas'] === "Sim") ? 1 : 0
-          break;
-        case "patio_descoberto":
-          pontuacao += (resposta.dataValues['patio_descoberto'] === "Sim") ? 1 : 0
-          break;
-      
-        default:
-          break;
-      }
-    });
+    if (!resposta) {
+      res.json({
+        pontuacao: null,
+        resultado: "Resposta não encontrada",
+        resposta: null
+      });
+    }
+
+    const avaliacao = calcularPontuacaoTotal(resposta);
+
     res.json({
-      pontuacao,
+      pontuacao: avaliacao.pontuacao,
+      resultado: avaliacao.resultado,
       resposta
     });
   }
