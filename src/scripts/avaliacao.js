@@ -79,8 +79,30 @@ function calcularPontuacaoFaseInfra(resposta) {
   return pontuacao;
 }
 
+
+
+/**
+ * Calcula pontuação para todas as perguntas
+ * 
+ * @param { any } resposta Objeto com respostas como descrito no model
+ * @returns number
+ */
 function calcularPontuacaoTotal(resposta) {
-  return 0;
+  let pontuacao = calcularPontuacaoFaseAulas(resposta) + calcularPontuacaoFaseInfra(resposta);
+  let resultado = "";
+  if (pontuacao >= -9 && pontuacao < -5) {
+    resultado = "Escola DE RISCO";
+  } else if (pontuacao >= -5 && pontuacao < 2) {
+    resultado = "Escola AMEAÇA";
+  } else if (pontuacao >= 2 && pontuacao < 5) {
+    resultado = "Escola DEFENSORA";
+  } else if (pontuacao >= 5) {
+    resultado = "Escola PROTETORA";
+  }
+  return {
+    pontuacao,
+    resultado
+  };
 }
 
 module.exports = {

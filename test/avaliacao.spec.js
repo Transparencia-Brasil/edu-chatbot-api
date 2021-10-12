@@ -11,18 +11,10 @@ const {
   respostaSemprePositivo,
   respostaSempreNegativo,
   respostaMeioTermo,
-  respostaZero
+  respostaZero,
+  respostaEscolaDefensora,
+  respostaEscolaAmeaca
 } = require("./mock/respostas.js");
-
-describe("Calculo de pontuação", () => {
-
-  it("Com respostas vazias", () => {
-    expect(calcularPontuacaoFaseAulas(respostaVazia)).to.be.equal(0);
-    expect(calcularPontuacaoFaseInfra(respostaVazia)).to.be.equal(0);
-    expect(calcularPontuacaoTotal(respostaVazia)).to.be.equal(0);
-  });
-
-});
 
 describe("Calculo de pontuação das perguntas sobre 'aulas'", () => {
 
@@ -56,6 +48,69 @@ describe("Calculo de pontuação das perguntas sobre 'infra'", () => {
 
   it("Fase infra com pontuação 'Não sei responder'", () => {
     expect(calcularPontuacaoFaseInfra(respostaZero)).to.be.equal(0);
+  });
+
+});
+
+describe("Calculo de pontuação total", () => {
+
+  it("Com respostas vazias", () => {
+    expect(calcularPontuacaoFaseAulas(respostaVazia)).to.be.equal(0);
+    expect(calcularPontuacaoFaseInfra(respostaVazia)).to.be.equal(0);
+
+    const avaliacao = calcularPontuacaoTotal(respostaVazia);
+    expect(avaliacao).to.have.own.property('pontuacao');
+    expect(avaliacao).to.have.own.property('resultado');
+    expect(avaliacao.pontuacao).to.be.equal(0);
+    expect(avaliacao.resultado).to.be.equal('Escola AMEAÇA');
+  });
+
+  it("Avaliação total com pontuação máxima", () => {
+    const avaliacao = calcularPontuacaoTotal(respostaSemprePositivo);
+    expect(avaliacao).to.have.own.property('pontuacao');
+    expect(avaliacao).to.have.own.property('resultado');
+    expect(avaliacao.pontuacao).to.be.equal(7);
+    expect(avaliacao.resultado).to.be.equal('Escola PROTETORA');
+  });
+
+  it("Avaliação total com pontuação mínima", () => {
+    const avaliacao = calcularPontuacaoTotal(respostaSempreNegativo);
+    expect(avaliacao).to.have.own.property('pontuacao');
+    expect(avaliacao).to.have.own.property('resultado');
+    expect(avaliacao.pontuacao).to.be.equal(-9);
+    expect(avaliacao.resultado).to.be.equal('Escola DE RISCO');
+  });
+
+  it("Avaliação total com pontuação meio termo", () => {
+    const avaliacao = calcularPontuacaoTotal(respostaMeioTermo);
+    expect(avaliacao).to.have.own.property('pontuacao');
+    expect(avaliacao).to.have.own.property('resultado');
+    expect(avaliacao.pontuacao).to.be.equal(-1);
+    expect(avaliacao.resultado).to.be.equal('Escola AMEAÇA');
+  });
+
+  it("Avaliação total com pontuação 'Não sei responder'", () => {
+    const avaliacao = calcularPontuacaoTotal(respostaZero);
+    expect(avaliacao).to.have.own.property('pontuacao');
+    expect(avaliacao).to.have.own.property('resultado');
+    expect(avaliacao.pontuacao).to.be.equal(0);
+    expect(avaliacao.resultado).to.be.equal('Escola AMEAÇA');
+  });
+
+  it("Avaliação de Escola DEFENSORA", () => {
+    const avaliacao = calcularPontuacaoTotal(respostaEscolaDefensora);
+    expect(avaliacao).to.have.own.property('pontuacao');
+    expect(avaliacao).to.have.own.property('resultado');
+    expect(avaliacao.pontuacao).to.be.equal(4);
+    expect(avaliacao.resultado).to.be.equal('Escola DEFENSORA');
+  });
+
+  it("Avaliação de Escola AMEAÇA", () => {
+    const avaliacao = calcularPontuacaoTotal(respostaEscolaAmeaca);
+    expect(avaliacao).to.have.own.property('pontuacao');
+    expect(avaliacao).to.have.own.property('resultado');
+    expect(avaliacao.pontuacao).to.be.equal(-1);
+    expect(avaliacao.resultado).to.be.equal('Escola AMEAÇA');
   });
 
 });
