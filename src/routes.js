@@ -20,5 +20,7 @@ routes.post('/respostas/aulas', RespostaController.storeAulas);
 routes.post('/respostas/infra', RespostaController.storeInfra);
 routes.post('/respostas/fim', RespostaController.storeFim);
 routes.get('/avaliacao/:user_id', AvaliacaoController.get);
+routes.get('/avaliacao/:user_id/aulas', AvaliacaoController.getAulas);
+routes.get('/avaliacao/:user_id/infra', AvaliacaoController.getInfra);
 
 module.exports = routes;

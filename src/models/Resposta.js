@@ -23,7 +23,6 @@ class Resposta extends Model {
       espaco_alternativo_merenda: DataTypes.STRING,
       patio_descoberto: DataTypes.STRING,
       agua_lavar_maos: DataTypes.STRING,
-      agua_beber: DataTypes.STRING,
       area_verde: DataTypes.STRING,
       confirma_veracidade: DataTypes.STRING,
       complemento: DataTypes.TEXT,

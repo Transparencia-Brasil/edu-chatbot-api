@@ -1,6 +1,8 @@
 const { Op, Sequelize } = require('sequelize');
 const Resposta = require('../models/Resposta');
 
+const { calcularPontuacaoTotal, calcularPontuacaoFaseAulas, calcularPontuacaoFaseInfra } = require('../scripts/avaliacao');
+
 module.exports = {
   async get(req, res) {
     const user_id = req.params.user_id
@@ -13,22 +15,78 @@ module.exports = {
       ]
     });
 
-    let pontuacao = 0;
-    Object.keys(resposta.dataValues).map((item) => {
-      switch (item) {
-        case "aulas":
-          pontuacao += (resposta.dataValues['aulas'] === "Sim") ? 1 : 0
-          break;
-        case "patio_descoberto":
-          pontuacao += (resposta.dataValues['patio_descoberto'] === "Sim") ? 1 : 0
-          break;
-      
-        default:
-          break;
-      }
-    });
+    if (!resposta) {
+      res.json({
+        pontuacao: null,
+        resultado: "Resposta não encontrada",
+        resposta: null
+      });
+      return;
+    }
+
+    const avaliacao = calcularPontuacaoTotal(resposta);
+
     res.json({
-      pontuacao,
+      pontuacao: avaliacao.pontuacao,
+      resultado: avaliacao.resultado,
+      resposta
+    });
+  },
+
+  async getAulas(req, res) {
+    const user_id = req.params.user_id
+    const resposta = await Resposta.findOne({
+      where: {
+        user_id: user_id
+      },
+      order: [
+        ['created_at', 'DESC']
+      ]
+    });
+
+    if (!resposta) {
+      res.json({
+        pontuacao: null,
+        resultado: "Resposta não encontrada",
+        resposta: null
+      });
+      return;
+    }
+
+    const pontuacao = calcularPontuacaoFaseAulas(resposta);
+
+    res.json({
+      pontuacao: pontuacao,
+      resultado: "--",
+      resposta
+    });
+  },
+
+  async getInfra(req, res) {
+    const user_id = req.params.user_id
+    const resposta = await Resposta.findOne({
+      where: {
+        user_id: user_id
+      },
+      order: [
+        ['created_at', 'DESC']
+      ]
+    });
+
+    if (!resposta) {
+      res.json({
+        pontuacao: null,
+        resultado: "Resposta não encontrada",
+        resposta: null
+      });
+      return;
+    }
+
+    const pontuacao = calcularPontuacaoFaseInfra(resposta)
+
+    res.json({
+      pontuacao: pontuacao,
+      resultado: "--",
       resposta
     });
   }
