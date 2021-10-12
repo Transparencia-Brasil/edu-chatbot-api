@@ -14,7 +14,6 @@ const respostaVazia = {
   "espaco_alternativo_merenda": null,
   "patio_descoberto": null,
   "agua_lavar_maos": null,
-  "agua_beber": null,
   "area_verde": null,
   "confirma_veracidade": null,
   "complemento": null,
@@ -62,10 +61,37 @@ const respostaAulaZero = {
   "espaco_alternativo_merenda": "Não sei responder"
 }
 
+const respostaInfraSemprePositivo = {
+  "id": 1,
+  "user_id": "10000001",
+  "patio_descoberto": "Sim",
+  "agua_lavar_maos": "Sim",
+  "area_verde": "Sim"
+}
+
+const respostaInfraSempreNegativo = {
+  "id": 1,
+  "user_id": "10000001",
+  "patio_descoberto": "Não",
+  "agua_lavar_maos": "Não",
+  "area_verde": "Não"
+}
+
+const respostaInfraZero = {
+  "id": 1,
+  "user_id": "10000001",
+  "patio_descoberto": "Não sei responder",
+  "agua_lavar_maos": "Não sei responder",
+  "area_verde": "Não sei responder"
+}
+
 module.exports = {
   respostaVazia,
   respostaAulaSemprePositivo,
   respostaAulaSempreNegativo,
   respostaAulaMeioTermo,
-  respostaAulaZero
+  respostaAulaZero,
+  respostaInfraSemprePositivo,
+  respostaInfraSempreNegativo,
+  respostaInfraZero
 }

@@ -1,3 +1,9 @@
+/**
+ * Calcula pontuação para perguntas sobre 'aulas'
+ * 
+ * @param { any } resposta Objeto com respostas como descrito no model
+ * @returns number
+ */
 function calcularPontuacaoFaseAulas(resposta) {
   let pontuacao = 0;
   // Os professores estão usando máscara em sala de aula em todas as aulas?
@@ -42,8 +48,35 @@ function calcularPontuacaoFaseAulas(resposta) {
   return pontuacao;
 }
 
+/**
+ * Calcula pontuação para perguntas sobre 'infra'
+ * 
+ * @param { any } resposta Objeto com respostas como descrito no model
+ * @returns number
+ */
 function calcularPontuacaoFaseInfra(resposta) {
-  return 0;
+  let pontuacao = 0;
+  // Sua escola tem pátio descoberto?
+  if (typeof resposta !== "undefined" && resposta.patio_descoberto === "Sim") {
+    pontuacao += 1;
+  } else if (typeof resposta !== "undefined" && resposta.patio_descoberto === "Não") {
+    pontuacao += -1;
+  }
+
+  // Sua escola tem água para lavar as mãos?
+  if (typeof resposta !== "undefined" && resposta.agua_lavar_maos === "Sim") {
+    pontuacao += 1;
+  } else if (typeof resposta !== "undefined" && resposta.agua_lavar_maos === "Não") {
+    pontuacao += -2;
+  }
+
+  // Sua escola tem espaço verde com grama ou plantas?
+  if (typeof resposta !== "undefined" && resposta.area_verde === "Sim") {
+    pontuacao += 1;
+  } else if (typeof resposta !== "undefined" && resposta.area_verde === "Não") {
+    pontuacao += -1;
+  }
+  return pontuacao;
 }
 
 function calcularPontuacaoTotal(resposta) {

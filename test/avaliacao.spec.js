@@ -11,7 +11,10 @@ const {
   respostaAulaSemprePositivo,
   respostaAulaSempreNegativo,
   respostaAulaMeioTermo,
-  respostaAulaZero
+  respostaAulaZero,
+  respostaInfraSemprePositivo,
+  respostaInfraSempreNegativo,
+  respostaInfraZero
 } = require("./mock/respostas.js");
 
 describe("Calculo de pontuação", () => {
@@ -21,6 +24,10 @@ describe("Calculo de pontuação", () => {
     expect(calcularPontuacaoFaseInfra(respostaVazia)).to.be.equal(0);
     expect(calcularPontuacaoTotal(respostaVazia)).to.be.equal(0);
   });
+
+});
+
+describe("Calculo de pontuação das perguntas sobre 'aulas'", () => {
 
   it("Fase aulas com pontuação máxima", () => {
     expect(calcularPontuacaoFaseAulas(respostaAulaSemprePositivo)).to.be.equal(4);
@@ -36,6 +43,22 @@ describe("Calculo de pontuação", () => {
 
   it("Fase aulas com pontuação 'Não sei responder'", () => {
     expect(calcularPontuacaoFaseAulas(respostaAulaZero)).to.be.equal(0);
+  });
+
+});
+
+describe("Calculo de pontuação das perguntas sobre 'infra'", () => {
+
+  it("Fase infra com pontuação máxima", () => {
+    expect(calcularPontuacaoFaseInfra(respostaInfraSemprePositivo)).to.be.equal(3);
+  });
+
+  it("Fase infra com pontuação mínima", () => {
+    expect(calcularPontuacaoFaseInfra(respostaInfraSempreNegativo)).to.be.equal(-4);
+  });
+
+  it("Fase infra com pontuação 'Não sei responder'", () => {
+    expect(calcularPontuacaoFaseInfra(respostaInfraZero)).to.be.equal(0);
   });
 
 });
