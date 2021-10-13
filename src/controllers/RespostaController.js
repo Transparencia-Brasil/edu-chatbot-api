@@ -18,6 +18,7 @@ module.exports = {
   async storeInicio(req, res) {
     const { 
       user_id,
+      escola_id,
       aluno_rede_publica,
       relacao_escola,
       segmento_curso,
@@ -25,8 +26,9 @@ module.exports = {
       nome_escola,
      } = req.body;
 
-    const resposta = await Resposta.create({ 
+    const resposta = await Resposta.create({
       user_id,
+      escola_id,
       aluno_rede_publica,
       relacao_escola,
       segmento_curso,

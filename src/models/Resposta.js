@@ -10,6 +10,7 @@ class Resposta extends Model {
         allowNull: false,
       },
       user_id: DataTypes.STRING,
+      escola_id: DataTypes.STRING,
       aluno_rede_publica: DataTypes.STRING,
       relacao_escola: DataTypes.STRING,
       segmento_curso: DataTypes.STRING,
