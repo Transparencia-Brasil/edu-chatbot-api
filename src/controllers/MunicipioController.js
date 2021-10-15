@@ -17,7 +17,12 @@ module.exports = {
     }
     let whereUf = [];
     if (typeof uf !== 'undefined') {
-      whereUf.push({ 'uf': uf });
+      whereClause.push(Sequelize.where(
+        Sequelize.fn('LOWER', Sequelize.col('uf.uf')),
+        {
+          [Op.eq]: uf.toLowerCase()
+        }
+      ));
     }
 
     const municipios = await Municipio.findAll({
