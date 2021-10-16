@@ -136,6 +136,29 @@ const respostaZero = {
   "updatedAt": "2021-10-08T14:49:02.548Z"
 }
 
+const respostaEscolaProtetora = {
+  "id": 1,
+  "user_id": "10000001",
+  "aluno_rede_publica": null,
+  "relacao_escola": null,
+  "segmento_curso": null,
+  "nivel_escola": null,
+  "nome_escola": null,
+  "formato_aulas": null,
+  "professores_usando_mascara": "Sempre",
+  "alunos_usando_mascara": "Sempre",
+  "distanciamento_sala": "Sim",
+  "distanciamento_merenda": "Sim",
+  "espaco_alternativo_merenda": "Não",
+  "patio_descoberto": "Sim",
+  "agua_lavar_maos": "Sim",
+  "area_verde": "Sim",
+  "confirma_veracidade": null,
+  "complemento": null,
+  "createdAt": "2021-10-08T14:48:47.247Z",
+  "updatedAt": "2021-10-08T14:49:02.548Z"
+}
+
 const respostaEscolaDefensora = {
   "id": 1,
   "user_id": "10000001",
@@ -189,6 +212,7 @@ module.exports = {
   respostaMeioTermo,
   respostaNaoSeiResponder,
   respostaZero,
+  respostaEscolaProtetora,
   respostaEscolaDefensora,
   respostaEscolaAmeaca
 }
