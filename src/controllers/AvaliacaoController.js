@@ -18,6 +18,7 @@ module.exports = {
     if (!resposta) {
       res.json({
         pontuacao: null,
+        qtdRespostas: null,
         resultado: "Resposta não encontrada",
         resposta: null
       });
@@ -28,6 +29,7 @@ module.exports = {
 
     res.json({
       pontuacao: avaliacao.pontuacao,
+      qtdRespostas: avaliacao.qtdRespostas,
       resultado: avaliacao.resultado,
       resposta
     });
@@ -47,16 +49,18 @@ module.exports = {
     if (!resposta) {
       res.json({
         pontuacao: null,
+        qtdRespostas: null,
         resultado: "Resposta não encontrada",
         resposta: null
       });
       return;
     }
 
-    const pontuacao = calcularPontuacaoFaseAulas(resposta);
+    const avaliacao = calcularPontuacaoFaseAulas(resposta);
 
     res.json({
-      pontuacao: pontuacao,
+      pontuacao: avaliacao.pontuacao,
+      qtdRespostas: avaliacao.qtdRespostas,
       resultado: "--",
       resposta
     });
@@ -76,16 +80,18 @@ module.exports = {
     if (!resposta) {
       res.json({
         pontuacao: null,
+        qtdRespostas: null,
         resultado: "Resposta não encontrada",
         resposta: null
       });
       return;
     }
 
-    const pontuacao = calcularPontuacaoFaseInfra(resposta)
+    const avaliacao = calcularPontuacaoFaseInfra(resposta)
 
     res.json({
-      pontuacao: pontuacao,
+      pontuacao: avaliacao.pontuacao,
+      qtdRespostas: avaliacao.qtdRespostas,
       resultado: "--",
       resposta
     });
