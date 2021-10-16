@@ -90,6 +90,29 @@ const respostaMeioTermo = {
   "updatedAt": "2021-10-08T14:49:02.548Z"
 }
 
+const respostaNaoSeiResponder = {
+  "id": 1,
+  "user_id": "10000001",
+  "aluno_rede_publica": null,
+  "relacao_escola": null,
+  "segmento_curso": null,
+  "nivel_escola": null,
+  "nome_escola": null,
+  "formato_aulas": null,
+  "professores_usando_mascara": "Não sei responder",
+  "alunos_usando_mascara": "Não sei responder",
+  "distanciamento_sala": "Não sei responder",
+  "distanciamento_merenda": "Não sei responder",
+  "espaco_alternativo_merenda": "Não sei responder",
+  "patio_descoberto": "Não sei responder",
+  "agua_lavar_maos": "Não sei responder",
+  "area_verde": "Não sei responder",
+  "confirma_veracidade": null,
+  "complemento": null,
+  "createdAt": "2021-10-08T14:48:47.247Z",
+  "updatedAt": "2021-10-08T14:49:02.548Z"
+}
+
 const respostaZero = {
   "id": 1,
   "user_id": "10000001",
@@ -147,10 +170,10 @@ const respostaEscolaAmeaca = {
   "formato_aulas": null,
   "professores_usando_mascara": "Às vezes",
   "alunos_usando_mascara": "Às vezes",
-  "distanciamento_sala": "Não sei responder",
-  "distanciamento_merenda": "Não sei responder",
-  "espaco_alternativo_merenda": "Não sei responder",
-  "patio_descoberto": "Não sei responder",
+  "distanciamento_sala": "Não",
+  "distanciamento_merenda": "Não está tendo merenda",
+  "espaco_alternativo_merenda": "",
+  "patio_descoberto": "Sim",
   "agua_lavar_maos": "Não sei responder",
   "area_verde": "Não sei responder",
   "confirma_veracidade": null,
@@ -164,6 +187,7 @@ module.exports = {
   respostaSemprePositivo,
   respostaSempreNegativo,
   respostaMeioTermo,
+  respostaNaoSeiResponder,
   respostaZero,
   respostaEscolaDefensora,
   respostaEscolaAmeaca
