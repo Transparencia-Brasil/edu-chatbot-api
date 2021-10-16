@@ -124,7 +124,7 @@ function calcularPontuacaoTotal(resposta) {
   let pontuacao = faseAula.pontuacao + faseInfra.pontuacao;
   let qtdRespostas = faseAula.qtdRespostas + faseInfra.qtdRespostas;
 
-  if (qtdRespostas < 4) {
+  if (qtdRespostas < 3) {
     return {
       pontuacao: null,
       resultado: "--",

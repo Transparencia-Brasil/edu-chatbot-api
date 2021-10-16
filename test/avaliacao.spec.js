@@ -209,8 +209,8 @@ describe("Calculo de pontuação total", () => {
     expect(avaliacao).to.have.own.property('pontuacao');
     expect(avaliacao).to.have.own.property('resultado');
     expect(avaliacao).to.have.own.property('qtdRespostas');
-    expect(avaliacao.pontuacao).to.be.equal(null);
-    expect(avaliacao.resultado).to.be.equal('--');
+    expect(avaliacao.pontuacao).to.be.equal(-1);
+    expect(avaliacao.resultado).to.be.equal('Escola AMEAÇA');
     expect(avaliacao.qtdRespostas).to.be.equal(3);
   });
 
