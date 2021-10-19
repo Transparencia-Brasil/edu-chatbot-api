@@ -23,6 +23,7 @@ module.exports = {
       siafi_id: Sequelize.DataTypes.INTEGER,
       ddd: Sequelize.DataTypes.INTEGER,
       fuso_horario: Sequelize.DataTypes.STRING,
+      nome_formatado: Sequelize.DataTypes.STRING,
     });
   },
 
