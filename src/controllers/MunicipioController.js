@@ -8,12 +8,22 @@ module.exports = {
 
     const whereClause = [];
     if (typeof nome !== 'undefined') {
-      whereClause.push(Sequelize.where(
-        Sequelize.fn('LOWER', Sequelize.col('Municipio.nome')),
-        {
-          [Op.like]: '%' + nome.toLowerCase() + '%'
-        }
-      ));
+      whereClause.push({
+        [Op.or]: [
+          Sequelize.where(
+            Sequelize.fn('LOWER', Sequelize.col('Municipio.nome')),
+            {
+              [Op.like]: '%' + nome.toLowerCase() + '%'
+            }
+          ),
+          Sequelize.where(
+            Sequelize.fn('LOWER', Sequelize.col('Municipio.nome_formatado')),
+            {
+              [Op.like]: '%' + nome.toLowerCase() + '%'
+            }
+          )
+        ]
+      });
     }
     let whereUf = [];
     if (typeof uf !== 'undefined') {

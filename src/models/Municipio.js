@@ -23,6 +23,7 @@ class Municipio extends Model {
       siafi_id: DataTypes.INTEGER,
       ddd: DataTypes.INTEGER,
       fuso_horario: DataTypes.STRING,
+      nome_formatado: DataTypes.STRING,
     }, {
       sequelize: connection,
       timestamps: false
