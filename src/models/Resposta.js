@@ -22,6 +22,7 @@ class Resposta extends Model {
       distanciamento_sala: DataTypes.STRING,
       distanciamento_merenda: DataTypes.STRING,
       espaco_alternativo_merenda: DataTypes.STRING,
+      ventilacao: DataTypes.STRING,
       patio_descoberto: DataTypes.STRING,
       agua_lavar_maos: DataTypes.STRING,
       area_verde: DataTypes.STRING,

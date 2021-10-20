@@ -64,6 +64,18 @@ function calcularPontuacaoFaseAulas(resposta) {
     qtdRespostas++;
   }
 
+  // Como está a ventilação natural da sala de aula? Portas e janelas são mantidas abertas durante as aulas?
+  if (typeof resposta !== "undefined" && resposta.ventilacao === "Sim") {
+    pontuacao += 1;
+    qtdRespostas++;
+  } else if (typeof resposta !== "undefined" && resposta.ventilacao === "Apenas portas ou apenas janelas") {
+    pontuacao += -0.5;
+    qtdRespostas++;
+  } else if (typeof resposta !== "undefined" && resposta.ventilacao === "Não") {
+    pontuacao += -1;
+    qtdRespostas++;
+  }
+
   return {
     pontuacao,
     qtdRespostas
@@ -133,11 +145,11 @@ function calcularPontuacaoTotal(resposta) {
   }
 
   let resultado = "";
-  if (pontuacao >= -9 && pontuacao < -5) {
+  if (pontuacao >= -10 && pontuacao < -4) {
     resultado = "Escola DE RISCO";
-  } else if (pontuacao >= -5 && pontuacao < 2) {
+  } else if (pontuacao >= -4 && pontuacao < 1) {
     resultado = "Escola AMEAÇA";
-  } else if (pontuacao >= 2 && pontuacao < 5) {
+  } else if (pontuacao >= 1 && pontuacao < 5) {
     resultado = "Escola DEFENSORA";
   } else if (pontuacao >= 5) {
     resultado = "Escola PROTETORA";

@@ -48,6 +48,7 @@ module.exports = {
       distanciamento_sala,
       distanciamento_merenda,
       espaco_alternativo_merenda,
+      ventilacao,
      } = req.body;
 
     const respostaInicio = await Resposta.findOne({
@@ -66,6 +67,7 @@ module.exports = {
       distanciamento_sala,
       distanciamento_merenda,
       espaco_alternativo_merenda,
+      ventilacao,
      }, {
        where: {
          id: respostaInicio.id
