@@ -35,7 +35,7 @@ class Escola extends Model {
   }
 
   static associate(models) {
-    this.hasOne(models.Email, { foreignKey: 'escola_id', as : 'email' })
+    this.hasMany(models.Email, { foreignKey: 'escola_id', as : 'email' })
   }
 }
 
