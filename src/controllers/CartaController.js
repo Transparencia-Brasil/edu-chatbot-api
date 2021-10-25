@@ -1,17 +1,15 @@
 const { Op, Sequelize } = require('sequelize');
+const { Parser } = require('json2csv');
+
 const Resposta = require('../models/Resposta');
 const Escola = require('../models/Escola');
 const Email = require('../models/Email');
 
-const {
-  getTextosProblemasSeguranca,
-  getTextosProblemasInfraestrutura,
-  getTextosRecomendacoes,
-  getDivergencias, 
-  getCartaCompleta} = require('../scripts/geradorCartas');
+const { getCartaCompleta } = require('../scripts/geradorCartas');
 
 module.exports = {
   async find(req, res) {
+    const { formato } = req.query;
     const respostas = await Resposta.findAll({
       where: {
         [Op.and]: [
@@ -59,6 +57,14 @@ module.exports = {
       }
     });
 
+    if (formato === 'csv') {
+      const json2csv = new Parser();
+      const csv = json2csv.parse(cartas);
+      res.header('Content-Type', 'text/csv');
+      res.attachment('cartas.csv');
+      return res.send(csv);
+    }
     return res.json(cartas);
+
   }
 }
