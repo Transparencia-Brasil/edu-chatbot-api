@@ -33,6 +33,10 @@ class Escola extends Model {
       timestamps: false
     })
   }
+
+  static associate(models) {
+    this.hasOne(models.Email, { foreignKey: 'escola_id', as : 'email' })
+  }
 }
 
 module.exports = Escola;
