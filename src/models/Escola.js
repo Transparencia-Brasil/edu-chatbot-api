@@ -21,7 +21,7 @@ class Escola extends Model {
       co_uf: DataTypes.INTEGER,
       co_municipio: DataTypes.INTEGER,
       co_distrito: DataTypes.INTEGER,
-      in_agua_inexistente: DataTypes.INTEGER,
+      // in_agua_inexistente: DataTypes.INTEGER,
       in_agua_potavel: DataTypes.INTEGER,
       in_area_verde: DataTypes.INTEGER,
       in_patio_descoberto: DataTypes.INTEGER,

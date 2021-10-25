@@ -3,6 +3,12 @@ const Resposta = require('../models/Resposta');
 const Escola = require('../models/Escola');
 const Email = require('../models/Email');
 
+const {
+  getTextosProblemasSeguranca,
+  getTextosProblemasInfraestrutura,
+  getTextosRecomendacoes,
+  getDivergencias } = require('../scripts/geradorCartas');
+
 module.exports = {
   async find(req, res) {
     const respostas = await Resposta.findAll({
@@ -44,6 +50,13 @@ module.exports = {
       ]
     });
 
-    return res.json(respostas);
+    const cartas = respostas.map(resposta => {
+      return {
+        carta: getDivergencias(resposta, resposta.escola),
+        resposta
+      }
+    });
+
+    return res.json(cartas);
   }
 }
