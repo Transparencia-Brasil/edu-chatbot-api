@@ -41,7 +41,7 @@ module.exports = {
           include: [
             {
               model: Email,
-              as: 'email'
+              as: 'emails'
             }
           ]
         }
@@ -52,9 +52,10 @@ module.exports = {
     });
 
     const cartas = respostas.map(resposta => {
+      const emails = resposta.escola.emails.map(email => email['email_gestao']);
       return {
-        carta: getCartaCompleta(resposta, resposta.escola),
-        resposta
+        emails: emails.join(', '),
+        carta: getCartaCompleta(resposta, resposta.escola)
       }
     });
 
