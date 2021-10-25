@@ -7,7 +7,8 @@ const {
   getTextosProblemasSeguranca,
   getTextosProblemasInfraestrutura,
   getTextosRecomendacoes,
-  getDivergencias } = require('../scripts/geradorCartas');
+  getDivergencias, 
+  getCartaCompleta} = require('../scripts/geradorCartas');
 
 module.exports = {
   async find(req, res) {
@@ -52,7 +53,7 @@ module.exports = {
 
     const cartas = respostas.map(resposta => {
       return {
-        carta: getDivergencias(resposta, resposta.escola),
+        carta: getCartaCompleta(resposta, resposta.escola),
         resposta
       }
     });

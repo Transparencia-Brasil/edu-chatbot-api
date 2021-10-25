@@ -1,3 +1,9 @@
+/**
+ * Retorna um array de textos apontando problemas com base nas respostas sobre Segurança
+ * 
+ * @param { any } resposta Objeto com respostas como descrito no model
+ * @returns array
+ */
 function getTextosProblemasSeguranca(resposta) {
   const professores_usando_mascara = new Map();
   professores_usando_mascara.set('Às vezes', 'Professores e professoras somente às vezes estão usando máscara em sala de aula');
@@ -50,6 +56,12 @@ function getTextosProblemasSeguranca(resposta) {
   return textos;
 }
 
+/**
+ * Retorna um array de textos apontando problemas com base nas respostas sobre Infraestrutura
+ * 
+ * @param { any } resposta Objeto com respostas como descrito no model
+ * @returns array
+ */
 function getTextosProblemasInfraestrutura(resposta) {
   const patio_descoberto = new Map();
   patio_descoberto.set('Não', 'A escola não possui pátio descoberto');
@@ -78,6 +90,12 @@ function getTextosProblemasInfraestrutura(resposta) {
   return textos;
 }
 
+/**
+ * Retorna um array de textos com recomendações com base em todas as respostas
+ * 
+ * @param { any } resposta Objeto com respostas como descrito no model
+ * @returns array
+ */
 function getTextosRecomendacoes(resposta) {
   const professores_usando_mascara = new Map();
   professores_usando_mascara.set('Às vezes', 'Seja exigido que professores e professoras sempre estejam de máscara em sala de aula');
@@ -151,6 +169,14 @@ function getTextosRecomendacoes(resposta) {
   return textos;
 }
 
+/**
+ * Retorna um array contendo um texto para cada divergencia entre o respondido
+ * (preenchido em `resposta`) e os dados do Censo (contidos em `escola`)
+ * 
+ * @param { any } resposta Objeto com respostas como descrito no model
+ * @param { any } escola Objeto escola como descrito no model
+ * @returns array
+ */
 function getDivergencias(resposta, escola) {
   const patio_descoberto = new Map();
   patio_descoberto.set('Sim', 'Possui pátio descoberto');
@@ -193,9 +219,51 @@ function getDivergencias(resposta, escola) {
   return textos;
 }
 
+/**
+ * Retorna texto completo da carta para gestores(as)
+ * 
+ * @param { any } resposta Objeto com respostas como descrito no model
+ * @returns string
+ */
+function getCartaCompleta(resposta, escola) {
+  let texto = `Prezado(a) gestor(a) da ${escola.no_entidade}
+A reabertura segura das escolas é fundamental para garantir o direito à educação, preservando a saúde de toda a comunidade escolar. Pensando nisso, a Transparência Brasil e o Mapa Educação criaram o Chatbot Edu, que permite a comunidade escolar reportar como está sendo a retomada das aulas presenciais nas escolas.
+
+Nós recebemos informações a respeito da ${escola.no_entidade} sobre as medidas de combate a covid-19 e a situação de infraestrutura escolar.`
+
+  const problemasSeguranca = getTextosProblemasSeguranca(resposta);
+  if (problemasSeguranca.length > 0) {
+    texto += `\nForam reportados os seguintes problemas com protocolos de segurança:\n`;
+    problemasSeguranca.forEach(problema => texto += `${problema}\n`);
+  }
+  const problemasInfraestrutura = getTextosProblemasInfraestrutura(resposta);
+  if (problemasInfraestrutura.length > 0) {
+    texto += `\nForam reportados os seguintes problemas de infraestrutura:\n`;
+    problemasInfraestrutura.forEach(problema => texto += `${problema}\n`);
+  }
+
+  const recomendacoes = getTextosRecomendacoes(resposta);
+  if (recomendacoes.length > 0) {
+    texto += `\nDiante destas informações, sugerimos que:\n`;
+    recomendacoes.forEach(recomendacao => texto += `${recomendacao}\n`);
+  }
+  
+  const divergencias = getDivergencias(resposta, escola);
+  if (divergencias.length > 0) {
+    texto += `\nAdicionalmente, a equipe técnica da Transparência Brasil analisou o conteúdo recebido e confrontou com os dados oficiais do Censo Escolar. Diferentemente do que foi publicado no último censo, foi reportado que a escola:\n`;
+    divergencias.forEach(divergencia => texto += `${divergencia}\n`);
+    texto += `\nSolicitamos que os dados sejam corrigidos junto ao Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira.\n`;
+  }
+
+  texto += `\nPor favor, responda à comunidade escolar por meio deste e-mail sobre quais medidas serão tomadas. Caso queira contestar alguma das informações reportadas, por favor, use este mesmo canal.`
+
+  return texto;
+}
+
 module.exports = {
   getTextosProblemasSeguranca,
   getTextosProblemasInfraestrutura,
   getTextosRecomendacoes,
-  getDivergencias
+  getDivergencias,
+  getCartaCompleta
 }
