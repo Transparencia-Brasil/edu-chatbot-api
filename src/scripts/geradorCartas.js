@@ -226,7 +226,7 @@ function getDivergencias(resposta, escola) {
  * @returns string
  */
 function getCartaCompleta(resposta, escola) {
-  let texto = `Prezado(a) gestor(a) da ${escola.no_entidade}
+  let texto = `Prezado(a) gestor(a) da ${escola.no_entidade},
 
 A reabertura segura das escolas é fundamental para garantir o direito à educação, preservando a saúde de toda a comunidade escolar. Pensando nisso, a Transparência Brasil e o Mapa Educação criaram o Chatbot Edu, que permite a comunidade escolar reportar como está sendo a retomada das aulas presenciais nas escolas.
 
@@ -235,18 +235,18 @@ Nós recebemos informações a respeito da ${escola.no_entidade} sobre as medida
   const problemasSeguranca = getTextosProblemasSeguranca(resposta);
   if (problemasSeguranca.length > 0) {
     texto += `\nForam reportados os seguintes problemas com protocolos de segurança:\n`;
-    problemasSeguranca.forEach(problema => texto += `- ${problema}\n`);
+    problemasSeguranca.forEach(problema => texto += `- ${problema};\n`);
   }
   const problemasInfraestrutura = getTextosProblemasInfraestrutura(resposta);
   if (problemasInfraestrutura.length > 0) {
     texto += `\nForam reportados os seguintes problemas de infraestrutura:\n`;
-    problemasInfraestrutura.forEach(problema => texto += `- ${problema}\n`);
+    problemasInfraestrutura.forEach(problema => texto += `- ${problema};\n`);
   }
 
   const recomendacoes = getTextosRecomendacoes(resposta);
   if (recomendacoes.length > 0) {
     texto += `\nDiante destas informações, sugerimos que:\n`;
-    recomendacoes.forEach(recomendacao => texto += `- ${recomendacao}\n`);
+    recomendacoes.forEach(recomendacao => texto += `- ${recomendacao};\n`);
   }
   
   const divergencias = getDivergencias(resposta, escola);
