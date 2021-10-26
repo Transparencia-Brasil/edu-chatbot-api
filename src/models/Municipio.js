@@ -31,7 +31,7 @@ class Municipio extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Uf, { foreignKey: 'codigo_uf', as : 'uf' })
+    this.belongsTo(models.Uf, { foreignKey: 'codigo_uf', as : 'uf' });
   }
 }
 

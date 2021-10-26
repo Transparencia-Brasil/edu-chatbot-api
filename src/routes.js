@@ -3,6 +3,7 @@ const AvaliacaoController = require('./controllers/AvaliacaoController');
 const EscolaController = require('./controllers/EscolaController');
 const MunicipioController = require('./controllers/MunicipioController');
 const RespostaController = require('./controllers/RespostaController');
+const CartaController = require('./controllers/CartaController');
 
 const routes = express.Router();
 
@@ -22,5 +23,6 @@ routes.post('/respostas/fim', RespostaController.storeFim);
 routes.get('/avaliacao/:user_id', AvaliacaoController.get);
 routes.get('/avaliacao/:user_id/aulas', AvaliacaoController.getAulas);
 routes.get('/avaliacao/:user_id/infra', AvaliacaoController.getInfra);
+routes.get('/cartas', CartaController.find);
 
 module.exports = routes;

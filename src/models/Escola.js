@@ -19,9 +19,15 @@ class Escola extends Model {
       co_mesorregiao: DataTypes.INTEGER,
       co_microrregiao: DataTypes.INTEGER,
       co_uf: DataTypes.INTEGER,
-      co_municipio: DataTypes.INTEGER,
+      co_municipio: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: { model: 'municipios', key: 'codigo_ibge' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
       co_distrito: DataTypes.INTEGER,
-      in_agua_inexistente: DataTypes.INTEGER,
+      // in_agua_inexistente: DataTypes.INTEGER,
       in_agua_potavel: DataTypes.INTEGER,
       in_area_verde: DataTypes.INTEGER,
       in_patio_descoberto: DataTypes.INTEGER,
@@ -32,6 +38,11 @@ class Escola extends Model {
       sequelize: connection,
       timestamps: false
     })
+  }
+
+  static associate(models) {
+    this.hasMany(models.Email, { foreignKey: 'escola_id', as : 'emails' })
+    this.hasOne(models.Municipio, { foreignKey: 'codigo_ibge', sourceKey: 'co_municipio', as: 'municipio' })
   }
 }
 

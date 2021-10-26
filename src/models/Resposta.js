@@ -34,6 +34,10 @@ class Resposta extends Model {
       modelName: 'respostas'
     })
   }
+
+  static associate(models) {
+    this.belongsTo(models.Escola, { foreignKey: 'escola_id', as : 'escola' })
+  }
 }
 
 module.exports = Resposta;

@@ -5,7 +5,7 @@ const { calcularPontuacaoTotal, calcularPontuacaoFaseAulas, calcularPontuacaoFas
 
 module.exports = {
   async get(req, res) {
-    const user_id = req.params.user_id
+    const user_id = req.params.user_id;
     const resposta = await Resposta.findOne({
       where: {
         user_id: user_id
