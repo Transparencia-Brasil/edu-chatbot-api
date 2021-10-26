@@ -4,6 +4,8 @@ const { Parser } = require('json2csv');
 const Resposta = require('../models/Resposta');
 const Escola = require('../models/Escola');
 const Email = require('../models/Email');
+const Municipio = require('../models/Municipio');
+const Uf = require('../models/Uf');
 
 const { getCartaCompleta } = require('../scripts/geradorCartas');
 
@@ -38,6 +40,19 @@ module.exports = {
           as: 'escola',
           include: [
             {
+              attributes: ['nome'],
+              model: Municipio,
+              as: 'municipio',
+              include: [
+                {
+                  attributes: ['uf'],
+                  model: Uf,
+                  as: 'uf'
+                }
+              ]
+            },
+            {
+              attributes: ['email_gestao'],
               model: Email,
               as: 'emails'
             }
@@ -52,6 +67,11 @@ module.exports = {
     const cartas = respostas.map(resposta => {
       const emails = resposta.escola.emails.map(email => email['email_gestao']);
       return {
+        id: resposta.id,
+        timestamp: resposta.updatedAt,
+        escola_id: resposta.escola.co_entidade,
+        municipio: resposta.escola.municipio.nome,
+        uf: resposta.escola.municipio.uf.uf,
         emails: emails.join(', '),
         carta: getCartaCompleta(resposta, resposta.escola)
       }
@@ -62,9 +82,10 @@ module.exports = {
       const csv = json2csv.parse(cartas);
       res.header('Content-Type', 'text/csv');
       res.attachment('cartas.csv');
+      
       return res.send(csv);
     }
-    return res.json(cartas);
 
+    return res.json(cartas);
   }
 }
