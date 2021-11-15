@@ -6,6 +6,7 @@ const Municipio = require('../models/Municipio');
 const Escola = require('../models/Escola');
 const Resposta = require('../models/Resposta');
 const Email = require('../models/Email');
+const Usuario = require('../models/Usuario');
 
 const connection = new Sequelize(config);
 
@@ -14,6 +15,7 @@ Municipio.init(connection);
 Escola.init(connection);
 Resposta.init(connection);
 Email.init(connection);
+Usuario.init(connection);
 
 Uf.associate(connection.models);
 Municipio.associate(connection.models);
