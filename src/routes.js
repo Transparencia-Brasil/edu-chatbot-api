@@ -44,7 +44,7 @@ routes.get('/avaliacao/:user_id/aulas', AvaliacaoController.getAulas);
 routes.get('/avaliacao/:user_id/infra', AvaliacaoController.getInfra);
 routes.get('/cartas', CartaController.find);
 routes.get('/usuarios', checkToken, UsuarioController.index);
-routes.post('/usuarios/registrar', UsuarioController.register);
+// routes.post('/usuarios/registrar', UsuarioController.register);
 routes.post('/usuarios/login', UsuarioController.login);
 
 module.exports = routes;

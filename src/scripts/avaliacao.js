@@ -76,6 +76,24 @@ function calcularPontuacaoFaseAulas(resposta) {
     qtdRespostas++;
   }
 
+  // É exigido comprovante de vacinação na sua escola?
+  if (typeof resposta !== "undefined" && resposta.vacinacao === "Sim") {
+    pontuacao += 1;
+    qtdRespostas++;
+  } else if (typeof resposta !== "undefined" && resposta.vacinacao === "Não") {
+    // pontuacao += 0;
+    qtdRespostas++;
+  }
+
+  // Quando alguém de uma turma testa positivo para covid-19, as aulas da turma são suspensas?
+  if (typeof resposta !== "undefined" && resposta.testes === "Sim") {
+    pontuacao += 1;
+    qtdRespostas++;
+  } else if (typeof resposta !== "undefined" && resposta.testes === "Não") {
+    // pontuacao += 0;
+    qtdRespostas++;
+  }
+
   return {
     pontuacao,
     qtdRespostas
@@ -149,9 +167,9 @@ function calcularPontuacaoTotal(resposta) {
     resultado = "Escola DE RISCO";
   } else if (pontuacao >= -4 && pontuacao < 1) {
     resultado = "Escola AMEAÇA";
-  } else if (pontuacao >= 1 && pontuacao < 5) {
+  } else if (pontuacao >= 1 && pontuacao < 5.6) {
     resultado = "Escola DEFENSORA";
-  } else if (pontuacao >= 5) {
+  } else if (pontuacao >= 5.6) {
     resultado = "Escola PROTETORA";
   }
 

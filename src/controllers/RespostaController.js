@@ -64,6 +64,8 @@ module.exports = {
         distanciamento_merenda,
         espaco_alternativo_merenda,
         ventilacao,
+        vacinacao,
+        testes,
       } = req.body;
 
       const respostaInicio = await Resposta.findOne({
@@ -82,6 +84,8 @@ module.exports = {
           distanciamento_merenda,
           espaco_alternativo_merenda,
           ventilacao,
+          vacinacao,
+          testes,
         },
         {
           where: {

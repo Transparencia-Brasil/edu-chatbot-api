@@ -26,6 +26,8 @@ class Resposta extends Model {
       patio_descoberto: DataTypes.STRING,
       agua_lavar_maos: DataTypes.STRING,
       area_verde: DataTypes.STRING,
+      vacinacao: DataTypes.STRING,
+      testes: DataTypes.STRING,
       confirma_veracidade: DataTypes.STRING,
       complemento: DataTypes.TEXT,
     }, {
