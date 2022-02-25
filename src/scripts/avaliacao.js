@@ -81,7 +81,7 @@ function calcularPontuacaoFaseAulas(resposta) {
     pontuacao += 1;
     qtdRespostas++;
   } else if (typeof resposta !== "undefined" && resposta.vacinacao === "Não") {
-    // pontuacao += 0;
+    pontuacao += -1;
     qtdRespostas++;
   }
 
@@ -90,7 +90,7 @@ function calcularPontuacaoFaseAulas(resposta) {
     pontuacao += 1;
     qtdRespostas++;
   } else if (typeof resposta !== "undefined" && resposta.testes === "Não") {
-    // pontuacao += 0;
+    pontuacao += -1;
     qtdRespostas++;
   }
 
@@ -163,13 +163,13 @@ function calcularPontuacaoTotal(resposta) {
   }
 
   let resultado = "";
-  if (pontuacao >= -10 && pontuacao < -4) {
+  if (pontuacao >= -12 && pontuacao < -6) {
     resultado = "Escola DE RISCO";
-  } else if (pontuacao >= -4 && pontuacao < 1) {
+  } else if (pontuacao >= -6 && pontuacao < 1) {
     resultado = "Escola AMEAÇA";
-  } else if (pontuacao >= 1 && pontuacao < 5.6) {
+  } else if (pontuacao >= 1 && pontuacao < 7) {
     resultado = "Escola DEFENSORA";
-  } else if (pontuacao >= 5.6) {
+  } else if (pontuacao >= 7) {
     resultado = "Escola PROTETORA";
   }
 
