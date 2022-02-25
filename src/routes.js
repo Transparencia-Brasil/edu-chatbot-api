@@ -30,18 +30,18 @@ function checkToken(req, res, next) {
   }
 }
 
-routes.get('/escolas', EscolaController.find);
-routes.get('/escolas/pesquisar', EscolaController.search);
-routes.get('/municipios/pesquisar', MunicipioController.search);
-routes.get('/respostas', RespostaController.index);
-routes.get('/respostas/:id', RespostaController.get);
-routes.post('/respostas/inicio', RespostaController.storeInicio);
-routes.post('/respostas/aulas', RespostaController.storeAulas);
-routes.post('/respostas/infra', RespostaController.storeInfra);
-routes.post('/respostas/fim', RespostaController.storeFim);
-routes.get('/avaliacao/:user_id', AvaliacaoController.get);
-routes.get('/avaliacao/:user_id/aulas', AvaliacaoController.getAulas);
-routes.get('/avaliacao/:user_id/infra', AvaliacaoController.getInfra);
+routes.get('/escolas', checkToken, EscolaController.find);
+routes.get('/escolas/pesquisar', checkToken, EscolaController.search);
+routes.get('/municipios/pesquisar', checkToken, MunicipioController.search);
+routes.get('/respostas', checkToken, RespostaController.index);
+routes.get('/respostas/:id', checkToken, RespostaController.get);
+routes.post('/respostas/inicio', checkToken, RespostaController.storeInicio);
+routes.post('/respostas/aulas', checkToken, RespostaController.storeAulas);
+routes.post('/respostas/infra', checkToken, RespostaController.storeInfra);
+routes.post('/respostas/fim', checkToken, RespostaController.storeFim);
+routes.get('/avaliacao/:user_id', checkToken, AvaliacaoController.get);
+routes.get('/avaliacao/:user_id/aulas', checkToken, AvaliacaoController.getAulas);
+routes.get('/avaliacao/:user_id/infra', checkToken, AvaliacaoController.getInfra);
 routes.get('/cartas', CartaController.find);
 routes.get('/usuarios', checkToken, UsuarioController.index);
 // routes.post('/usuarios/registrar', UsuarioController.register);
